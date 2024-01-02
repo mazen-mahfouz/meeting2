@@ -10,14 +10,14 @@
 
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+  location.hash = '#mazrn';
 }
-const roomHash = location.hash.substring(1);
+const roomHash = location.hash;
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('dccYU4r28TXuIJ8f');
 // Room name needs to be prefixed with 'observable-'
-const roomName = 'observable-' + '#mazen';
+const roomName = 'observable-' + roomHash;
 const configuration = {
   iceServers: [{
     urls: 'stun:stun.l.google.com:19302'
@@ -144,3 +144,4 @@ function localDescCreated(desc) {
     onError
   );
 }
+
