@@ -17,7 +17,7 @@ const roomHash = location.hash.substring(1);
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('dccYU4r28TXuIJ8f');
 // Room name needs to be prefixed with 'observable-'
-const roomName = 'observable-' + roomHash;
+const roomName = 'observable-' + '#mazen';
 const configuration = {
   iceServers: [{
     urls: 'stun:stun.l.google.com:19302'
