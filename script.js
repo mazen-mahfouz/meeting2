@@ -1,11 +1,11 @@
-var now = Date.now();
-navigator.mediaDevices.getUserMedia({audio: true, video: true})
-.then(function(stream) {
-  console.log('Got stream, time diff :', Date.now() - now);
-})
-.catch(function(err) {
-  console.log('GUM failed with error, time diff: ', Date.now() - now);
-});
+// var now = Date.now();
+// navigator.mediaDevices.getUserMedia({audio: true, video: true})
+// .then(function(stream) {
+//   console.log('Got stream, time diff :', Date.now() - now);
+// })
+// .catch(function(err) {
+//   console.log('GUM failed with error, time diff: ', Date.now() - now);
+// });
 
 
 // Generate random room name if needed
@@ -47,8 +47,22 @@ drone.on('open', error => {
   room.on('members', members => {
     console.log('MEMBERS', members);
     // If we are the second user to connect to the room we will be creating the offer
-    const isOfferer = members.length === 2;
+    const isOfferer = members.length <= 2;
+    if( members.length >= 2){
+      // console.log(pc.ontrack)
+      // pc.ontrack = event => {
+      //   const stream = event.streams[0];
+      //   remoteVideo.srcObject = stream;
+      //   if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
+      //     remoteVideo.srcObject = stream;
+      //   }else{
+      //   }
+      // };
+    
+    }
     startWebRTC(isOfferer);
+    
+
   });
 });
 
@@ -80,13 +94,12 @@ function startWebRTC(isOfferer) {
 
   // When a remote stream arrives display it in the #remoteVideo element
   pc.ontrack = event => {
+    console.log(pc.ontrack)
     const stream = event.streams[0];
-    console.log(stream)
     remoteVideo.srcObject = stream;
     if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
       remoteVideo.srcObject = stream;
     }else{
-      alert('asd')
     }
   };
 
